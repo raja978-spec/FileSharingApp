@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
+    {% load static %}
+</head>
+<body>
+    <center>
+        {% if files %}
+        {% for i in files %}
+           files: <a href="{{i.file.url}}">{{i.file}}</a>                    <button><a href="{{i.id}}">delete</a></button><br><br>
+        {% endfor %}
+        {% else %}
+        <h1 style="padding-top: 100px;">There is no file to show</h1><br>
+        <a href="home">click</a> to upload document
+        {% endif %}
+    </center>
+</body>
+</html>

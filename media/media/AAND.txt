@@ -1,0 +1,145 @@
+MAXIMUM AND MINIMUM NUMBER ELEMENT:
+
+Algorithm maxmin(low,high,max,min){
+
+// If the given array has only one element then the maximum
+// and minimun values are same. EX:[1] Here max and min value
+// is 1,so this statement do this same.
+if(low==high){
+ max:=min:=a[low];
+}
+
+// If the element has two element then it will be executed
+// Here index of low is 0 and high is 1 
+
+else if(low==high-1){  if 0==0 then 
+
+if(a[low] > a[high]){ if 20>10 then 
+
+max=a[low]   max=20 
+min=a[high]  min=10
+
+}
+}
+ 
+
+KNAPSACK PROBLEM IN GREDDY APPROACH:
+
+When we apply greedy approach to an specific problem
+it should in following conditions
+
+1.Feasible - All the problems has some pre defined conditions
+             that should be satisfied
+			 
+2.Locally optimal - We have to select one feasible solution
+                    from n number of solutions
+					
+3.Irrevocable - Once we declare a solution it should not be changed
+
+ 	
+EXAMPLE PROBLEM:
+
+                    RICE
+1. Weight(kg)   7    3    4    5
+   Profit       42   12   40   25
+
+   Bag_capacity(m)=10kg   
+   Constrait - (Summation)XiWi<=m
+   (Constrait describe we should not bring things
+    more than the weight of bag, Xi-items we are going to
+	put in bag)
+	
+	This is the condition for all knapsack problem
+	
+   Here the problem is 7kg rice rate is 42,3kg rice
+   rate is 12 and so on..
+	
+   STEP1: We have to find out the per kg rate for all 
+          Kg rice, for 7kg that is 42 so 1kg = 6, for
+		  3kg 1kg=4, for 4kg 1kg=10, for 5kg 1kg=5 
+		  
+		                       RICE
+             Weight(kg)   7    3    4    5
+             Profit       42   12   40   25
+             1kg rate     6    4    10    5 
+   
+   STEP2: Now have to put items into 10kg bag that should
+          have maximum profit,Here we have maximum profit
+		  on 4kg rice, so we put that 4kg rice to 10kg bag
+		  so 10-4=6, Next we have to pick another kg rice for 
+		  remaning space, for that we have to find the next
+		  maximum profit that is 7kg rice, it has profit 6 
+		  for 1kg, But we can't pick whole seven kg, we have
+		  remaning 6 space so we have to select 6kg from 7kg
+		  (6/7)
+  
+		                          RICE
+             Weight(kg)(Wi)   7    3    4    5
+             Profit(Pi)       42   12   40   25
+             1kg rate         6    4    10    5 
+
+			 Xi(items)        6/7  0    1    0
+   
+           
+		   Here If we take whole Kg then we need to put 1
+		   if we didn't take any kg rice from all of the rice
+		   then we put 0, On 7kg rice we just take 6kg to fill
+		   our bag.Now bag is filled.
+		   
+		   
+    STEP3: Next We have to find the total weight and profit with
+	       this formulas
+		   
+		   (Summation)XiWi = 6/7*7 + 0*3 + 1*4 + 0*5 = 10 
+            So weight is 10
+
+           (Summation)XiPi = 6/7*42 + 0*12 + 1*40 + 0*25 = 76
+            So the profit is 76 		   
+ 
+ALGORITHM:
+
+# A naive recursive implementation
+# of 0-1 Knapsack Problem
+ 
+# Returns the maximum value that
+# can be put in a knapsack of
+# capacity W
+ 
+ 
+def knapSack(W, wt, val, n):
+ 
+    # Base Case
+    if n == 0 or W == 0:
+        return 0
+ # If weight of the nth item is
+    # more than Knapsack of capacity W,
+    # then this item cannot be included
+    # in the optimal solution
+    if (wt[n-1] > W):
+        return knapSack(W, wt, val, n-1)
+ 
+    # return the maximum of two cases:
+    # (1) nth item included
+    # (2) not included
+    else:
+        return max(
+            val[n-1] + knapSack(
+                W-wt[n-1], wt, val, n-1),
+            knapSack(W, wt, val, n-1))
+ 
+# end of function knapSack
+ 
+ 
+#Driver Code
+val = [60, 100, 120]
+wt = [10, 20, 30]
+W = 50
+n = len(val)
+print knapSack(W, wt, val, n)
+   
+   
+   
+   
+	
+	
+   
